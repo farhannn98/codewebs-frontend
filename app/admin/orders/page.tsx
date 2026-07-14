@@ -41,7 +41,7 @@ export default function AdminOrdersPage() {
 
   // Ambil Data dari API Backend
   const fetchOrders = async () => {
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem("token");
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/orders`, {
         headers: {
@@ -112,7 +112,7 @@ export default function AdminOrdersPage() {
     e.preventDefault();
 
     // 1. Ambil token di sini agar bisa dibaca oleh kode di dalam blok 'try'
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem("token");
 
     const featuresArray = additionalFeatures
       ? additionalFeatures
@@ -181,7 +181,7 @@ export default function AdminOrdersPage() {
         label: "Hapus",
         onClick: async () => {
           // 1. AMBIL TOKEN DI SINI
-          const token = localStorage.getItem("admin_token");
+          const token = localStorage.getItem("token");
 
           try {
             const res = await fetch(

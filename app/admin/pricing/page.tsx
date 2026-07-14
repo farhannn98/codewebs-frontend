@@ -93,7 +93,7 @@ export default function PricingSettingsPage() {
 
   const handleSave = async (id: number) => {
     toast.promise(
-      fetch(`http://127.0.0.1:8000/api/service-packages/${id}`, {
+      fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/service-packages/${id}`, {
         method: "PUT",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
