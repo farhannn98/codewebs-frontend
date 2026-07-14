@@ -63,7 +63,7 @@ export default function AdminPortfolioPage() {
   }, []);
 
   const fetchPortfolios = async () => {
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem("token");
     try {
       const res = await fetch(
         `${process.env.NEXT_PUBLIC_API_URL}/api/portfolios`,
@@ -147,7 +147,7 @@ export default function AdminPortfolioPage() {
   const handleSavePortfolio = async (e: React.FormEvent) => {
     e.preventDefault();
 
-    const token = localStorage.getItem("admin_token");
+    const token = localStorage.getItem("token");
 
     const formData = new FormData();
     formData.append("title", title);
@@ -215,7 +215,7 @@ export default function AdminPortfolioPage() {
       action: {
         label: "Hapus",
         onClick: async () => {
-          const token = localStorage.getItem("admin_token");
+          const token = localStorage.getItem("token");
           try {
             const res = await fetch(
               `${process.env.NEXT_PUBLIC_API_URL}/api/portfolios/${id}`,
