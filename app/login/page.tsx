@@ -17,27 +17,26 @@ export default function LoginPage() {
     setIsLoading(true);
 
     try {
-      await fetch(`${process.env.NEXT_PUBLIC_API_URL}/sanctum/csrf-cookie`, {
-        method: "GET",
-        credentials: "include",
-      });
+      // HAPUS fetch csrf-cookie! Langsung tembak ke api/login
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
-          Accept: "application/json", // Tambahkan ini agar backend tahu kamu minta JSON
+          Accept: "application/json",
         },
         body: JSON.stringify({ email, password }),
-        credentials: "include", // INI KUNCINYA agar cookie sesi terkirim
+        // HAPUS credentials: "include" !!!
       });
 
       const data = await res.json();
 
-      if (data.token) {
-        localStorage.setItem("token", data.token);
+      // Sesuaikan dengan response backend kamu yang mengembalikan "success"
+      if (res.ok && data.success) {
+        localStorage.setItem("token", data.token); // Simpan token
+        alert("Login berhasil!");
         router.push("/admin");
       } else {
-        alert("Akses ditolak. Detail autentikasi salah.");
+        alert(data.message || "Akses ditolak. Detail autentikasi salah.");
       }
     } catch (error) {
       console.error("Error saat login:", error);
