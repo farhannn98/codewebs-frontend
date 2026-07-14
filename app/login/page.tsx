@@ -19,8 +19,12 @@ export default function LoginPage() {
     try {
       const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/login`, {
         method: "POST",
-        headers: { "Content-Type": "application/json" },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json", // Tambahkan ini agar backend tahu kamu minta JSON
+        },
         body: JSON.stringify({ email, password }),
+        credentials: "include", // INI KUNCINYA agar cookie sesi terkirim
       });
 
       const data = await res.json();
